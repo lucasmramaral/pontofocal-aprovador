@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SAGAS - Gestão de Responsáveis por Órgão</title>
+<style>
+:root{--brand:#176b5b;--brand2:#0f5146;--soft:#e8f4f1;--line:#d8e2e0;--danger:#b42318;--bg:#f8fafc;--text:#0f172a;--muted:#64748b}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif}.wrap{max-width:1380px;margin:auto;padding:24px}.top{background:white;border-bottom:1px solid #e2e8f0;padding:12px 24px;display:flex;justify-content:space-between;gap:16px;align-items:center;flex-wrap:wrap}.brand{display:flex;align-items:center;gap:12px}.logo{width:42px;height:42px;border-radius:9px;background:var(--brand);color:white;display:grid;place-items:center;font-weight:900;font-size:20px}.small{font-size:12px;color:var(--muted)}h1{font-size:26px;margin:0}.card{background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 1px 2px #0000000a}.tabs{display:flex;overflow:auto}.tab,.subtab{border:0;background:transparent;cursor:pointer;font-weight:750}.tab{padding:14px 18px;color:#64748b;border-bottom:3px solid transparent}.tab.active{color:var(--brand);border-color:var(--brand)}.subtab{padding:9px 13px;color:#64748b;border-radius:8px}.subtab.active{background:var(--soft);color:var(--brand2)}.btn{border:1px solid var(--line);background:#fff;border-radius:8px;padding:9px 14px;font-weight:700;cursor:pointer}.primary{background:var(--brand);border-color:var(--brand);color:white}.danger{color:var(--danger);border-color:#f1b5b1}.field{width:100%;border:1px solid #cbd5e1;border-radius:8px;padding:10px;background:white}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.kpi{padding:16px;text-align:left;cursor:pointer}.kpi strong{display:block;font-size:30px;margin-top:3px}.toolbar{padding:12px;border-bottom:1px solid #e2e8f0;display:flex;gap:7px;flex-wrap:wrap}.content{padding:16px}.filters{display:grid;grid-template-columns:1fr 220px;gap:12px;margin-bottom:15px}.filters4{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:12px;margin-bottom:15px}table{width:100%;border-collapse:collapse}th{padding:11px 12px;background:#f8fafc;border-bottom:1px solid var(--line);font-size:12px;text-transform:uppercase;letter-spacing:.03em;color:#64748b;text-align:left;cursor:pointer;user-select:none}th.no-sort{cursor:default}td{padding:12px;border-bottom:1px solid #e8eeee;font-size:14px;vertical-align:middle}.pill{display:inline-block;border-radius:999px;padding:4px 9px;font-size:12px;font-weight:800}.active{background:#dcfce7;color:#166534}.inactive{background:#f1f5f9;color:#475569}.warn{background:#fff7ed;color:#9a3412}.muted{color:var(--muted)}.modalbg{position:fixed;inset:0;background:#0f172a88;display:grid;place-items:center;padding:18px;z-index:10}.modal{background:#fff;border-radius:14px;width:min(760px,100%);max-height:90vh;overflow:auto}.modalhead,.modalfoot{padding:18px;border-bottom:1px solid #e2e8f0;display:flex;justify-content:space-between;gap:10px;align-items:center}.modalfoot{border-top:1px solid #e2e8f0;border-bottom:0;justify-content:flex-end}.modalbody{padding:18px;display:grid;gap:14px}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.label{font-size:13px;font-weight:750;margin-bottom:6px;display:block}.note{border:1px solid #fed7aa;background:#fff7ed;color:#9a3412;border-radius:9px;padding:11px;font-size:13px;line-height:1.45}.info-box{border:1px solid var(--line);background:#f8fafc;border-radius:9px;padding:12px;font-size:13px}.toast{position:fixed;top:18px;right:18px;background:#0f172a;color:white;padding:12px 15px;border-radius:9px;z-index:30}.headrow{display:flex;justify-content:space-between;gap:12px;align-items:start;flex-wrap:wrap;margin-bottom:16px}.search-combo{position:relative}.search-results{position:absolute;top:100%;left:0;right:0;background:#fff;border:1px solid #cbd5e1;border-radius:8px;margin-top:4px;max-height:200px;overflow:auto;z-index:20;box-shadow:0 4px 12px #00000018}.search-item{padding:9px 12px;cursor:pointer;border-bottom:1px solid #f1f5f9;font-size:13px}.search-item:hover{background:var(--soft)}@media(max-width:860px){.grid3,.grid2,.filters,.filters4,.formgrid{grid-template-columns:1fr}.wrap{padding:14px}.tablewrap{overflow:auto}.top{padding:10px 14px}}
+</style></head>
+<body>
+<header class="top">
+  <div class="brand">
+    <div class="logo">S</div>
+    <div><b>SAGAS</b><div class="small">Gestão de Responsáveis por Órgão</div></div>
+  </div>
+  <div class="small">Usuário logado: <b>Gestor Educacional (01049921)</b></div>
+</header>
+<main class="wrap">
+  <div class="headrow">
+    <div>
+      <h1>Responsáveis por Órgão</h1>
+      <div class="muted" style="margin-top:5px">Gerencie atribuições de Pontos Focais e Aprovadores sem datas de vigência.</div>
+    </div>
+    <div id="headerAction"></div>
+  </div>
+  <div class="card" style="margin-bottom:14px">
+    <nav class="tabs">
+      <button class="tab" data-role="focal">Pontos Focais</button>
+      <button class="tab" data-role="approver">Aprovadores</button>
+    </nav>
+  </div>
+  <section id="app"></section>
+</main>
+<div id="modal"></div>
+<div id="toast"></div>
+<script>
+(()=>{
+  const S={
+    role:'focal',
+    view:'assign',
+    search:'',
+    status:'all',
+    covSearch:'',
+    coverage:'all',
+    orgType:'all',
+    parentDir:'all',
+    sortCol:'org',
+    sortAsc:true,
+    people:[
+      {id:1,mat:'01081594',name:'Adinilson Martins da Silva',email:'adinilson.silva@serpro.gov.br'},
+      {id:2,mat:'01542710',name:'Maria Fernanda Souza',email:'maria.souza@serpro.gov.br'},
+      {id:3,mat:'01284033',name:'João Carlos Almeida',email:'joao.almeida@serpro.gov.br'},
+      {id:4,mat:'01155092',name:'Carla Mendes Ribeiro',email:'carla.ribeiro@serpro.gov.br'},
+      {id:5,mat:'01912204',name:'Rafael Costa Lima',email:'rafael.lima@serpro.gov.br'}
+    ],
+    orgs:[
+      {id:'DIPEJ',label:'DIPEJ',name:'Diretoria Jurídica e de Pessoas',type:'Diretoria',active:true},
+      {id:'SUPGP',label:'DIPEJ / SUPGP',name:'Superintendência de Gestão de Pessoas',type:'Superintendência',parent:'DIPEJ',active:true},
+      {id:'SUPES',label:'DIPEJ / SUPES',name:'Superintendência de Educação',type:'Superintendência',parent:'DIPEJ',active:true},
+      {id:'DIRAF',label:'DIRAF',name:'Diretoria de Administração e Finanças',type:'Diretoria',active:true},
+      {id:'SUPOR',label:'DIRAF / SUPOR',name:'Superintendência de Orçamento',type:'Superintendência',parent:'DIRAF',active:true},
+      {id:'SUPCO',label:'DIRAF / SUPCO',name:'Superintendência de Contratações',type:'Superintendência',parent:'DIRAF',active:true},
+      {id:'DITEC',label:'DITEC',name:'Diretoria de Tecnologia',type:'Diretoria',active:true},
+      {id:'SUPDE',label:'DITEC / SUPDE',name:'Superintendência de Desenvolvimento',type:'Superintendência',parent:'DITEC',active:true},
+      {id:'SUPIN',label:'DITEC / SUPIN',name:'Superintendência de Infraestrutura',type:'Superintendência',parent:'DITEC',active:true},
+      {id:'SUPET_OLD',label:'DIPEJ / SUPET',name:'Superintendência de Educação e Treinamento',type:'Superintendência',parent:'DIPEJ',active:false},
+      {id:'UNISE_OLD',label:'DIPEJ / UNISE (legado)',name:'Unidade de Serviços Educacionais',type:'Superintendência',parent:'DIPEJ',active:false}
+    ],
+    a:[
+      {id:101,role:'focal',person:2,org:'DIPEJ',active:true,created:'12/11/2026 09:15',createdBy:'Gestor Educacional (01049921)',inactivated:'',inactivatedBy:''},
+      {id:102,role:'focal',person:3,org:'SUPGP',active:true,created:'13/11/2026 14:22',createdBy:'Gestor Educacional (01049921)',inactivated:'',inactivatedBy:''},
+      {id:103,role:'focal',person:4,org:'SUPES',active:false,created:'03/08/2026 10:05',createdBy:'Gestor Educacional (01049921)',inactivated:'10/11/2026 16:40',inactivatedBy:'Gestor Educacional (01049921)'},
+      {id:201,role:'approver',person:1,org:'DIRAF',active:true,created:'01/09/2026 11:00',createdBy:'Gestor Educacional (01049921)',inactivated:'',inactivatedBy:''},
+      {id:202,role:'approver',person:5,org:'SUPOR',active:true,created:'04/09/2026 15:30',createdBy:'Gestor Educacional (01049921)',inactivated:'',inactivatedBy:''}
+    ],
+    hist:[
+      {id:301,person:2,org:'SUPET_OLD',active:true,created:'14/11/2026 10:30',createdBy:'Gestor Educacional (01049921)'}
+    ]
+  };
+
+  const p=id=>S.people.find(x=>x.id===id);
+  const o=id=>S.orgs.find(x=>x.id===id);
+  const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const nowStr=()=>{const d=new Date();return d.toLocaleDateString('pt-BR')+' '+d.toTimeString().slice(0,5)};
+
+  function covered(org){
+    return S.a.filter(x=>x.role===S.role&&x.active&&(x.org===org.id||(org.type==='Superintendência'&&x.org===org.parent)));
+  }
+
+  function toast(t){
+    document.querySelector('#toast').innerHTML='<div class="toast">'+esc(t)+'</div>';
+    setTimeout(()=>document.querySelector('#toast').innerHTML='',2600);
+  }
+
+  function syncHistAuto(personId){
+    const hasActiveFocal = S.a.some(x=>x.role==='focal'&&x.person===personId&&x.active);
+    if(!hasActiveFocal){
+      let count=0;
+      S.hist.forEach(h=>{if(h.person===personId&&h.active){h.active=false;count++}});
+      if(count>0) toast('Acessos históricos do empregado suspensos automaticamente por ausência de atribuição Ativa de Ponto Focal.');
+    }
+  }
+
+  function render(){
+    document.querySelectorAll('[data-role]').forEach(b=>b.classList.toggle('active',b.dataset.role===S.role));
+    document.querySelector('#headerAction').innerHTML='<button class="btn primary" data-new>+ Novo '+(S.role==='focal'?'Ponto Focal':'Aprovador')+'</button>';
+    const active=S.a.filter(x=>x.role===S.role&&x.active).length;
+    const uncovered=S.orgs.filter(x=>x.active&&!covered(x).length).length;
+    const h=S.hist.filter(x=>x.active).length;
+
+    const kpiGridClass = S.role==='focal' ? 'grid3' : 'grid2';
+    const thirdCard = S.role==='focal'
+      ? `<button class="card kpi" data-kpi="history"><span class="muted">Acessos históricos ativos</span><strong>${h}</strong><span class="small">Somente leitura</span></button>`
+      : '';
+
+    document.querySelector('#app').innerHTML=`
+      <div class="${kpiGridClass}" style="margin-bottom:14px">
+        <button class="card kpi" data-kpi="active">
+          <span class="muted">Atribuições ativas</span>
+          <strong>${active}</strong>
+          <span class="small">${S.role==='focal'?'Pontos Focais':'Aprovadores'}</span>
+        </button>
+        <button class="card kpi" data-kpi="uncovered">
+          <span class="muted">Órgãos sem ${S.role==='focal'?'Ponto Focal':'Aprovador'}</span>
+          <strong style="color:#b54708">${uncovered}</strong>
+          <span class="small">Diretorias e Superintendências ativas</span>
+        </button>
+        ${thirdCard}
+      </div>
+      <div class="card">
+        <div class="toolbar">
+          <button class="subtab ${S.view==='assign'?'active':''}" data-view="assign">Atribuições</button>
+          <button class="subtab ${S.view==='coverage'?'active':''}" data-view="coverage">Cobertura dos Órgãos</button>
+          ${S.role==='focal'?`<button class="subtab ${S.view==='history'?'active':''}" data-view="history">Estruturas Históricas</button>`:''}
+        </div>
+        ${S.view==='coverage'?coverageView():S.view==='history'?historyView():assignView()}
+      </div>`;
+  }
+
+  function assignView(){
+    let rows=S.a.filter(x=>x.role===S.role)
+      .filter(x=>S.status==='all'||(S.status==='active')===x.active)
+      .filter(x=>{
+        const q=(p(x.person).name+' '+p(x.person).mat+' '+o(x.org).label+' '+o(x.org).name).toLowerCase();
+        return !S.search||q.includes(S.search.toLowerCase());
+      });
+
+    rows.sort((a,b)=>{
+      let va='',vb='';
+      if(S.sortCol==='org'){va=o(a.org).label;vb=o(b.org).label}
+      else if(S.sortCol==='mat'){va=p(a.person).mat;vb=p(b.person).mat}
+      else if(S.sortCol==='name'){va=p(a.person).name;vb=p(b.person).name}
+      else if(S.sortCol==='status'){va=a.active?'Ativo':'Inativo';vb=b.active?'Ativo':'Inativo'}
+      else if(S.sortCol==='created'){va=a.created;vb=b.created}
+      else if(S.sortCol==='inactivated'){va=a.inactivated||'';vb=b.inactivated||''}
+      return S.sortAsc ? String(va).localeCompare(String(vb)) : String(vb).localeCompare(String(va));
+    });
+
+    const arrow=col=>S.sortCol===col?(S.sortAsc?' ▲':' ▼'):'';
+
+    return `<div class="content">
+      <div class="filters">
+        <input class="field" data-search value="${esc(S.search)}" placeholder="Buscar por órgão, matrícula ou nome do empregado">
+        <select class="field" data-status>
+          <option value="all">Todos os status</option>
+          <option value="active" ${S.status==='active'?'selected':''}>Ativo</option>
+          <option value="inactive" ${S.status==='inactive'?'selected':''}>Inativo</option>
+        </select>
+      </div>
+      <div class="tablewrap">
+        <table>
+          <thead>
+            <tr>
+              <th data-sort="org">Órgão${arrow('org')}</th>
+              <th data-sort="mat">Matrícula${arrow('mat')}</th>
+              <th data-sort="name">Nome do empregado${arrow('name')}</th>
+              <th data-sort="status">Status${arrow('status')}</th>
+              <th data-sort="created">Cadastrado Em${arrow('created')}</th>
+              <th data-sort="inactivated">Inativado Em${arrow('inactivated')}</th>
+              <th class="no-sort">Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${rows.map(x=>{
+              const P=p(x.person),O=o(x.org);
+              return `<tr>
+                <td><b>${esc(O.label)}</b><div class="small">${esc(O.name)}</div></td>
+                <td>${P.mat}</td>
+                <td><b>${esc(P.name)}</b></td>
+                <td><span class="pill ${x.active?'active':'inactive'}">${x.active?'Ativo':'Inativo'}</span></td>
+                <td>${x.created}</td>
+                <td>${x.inactivated||'—'}</td>
+                <td>
+                  <button class="btn" data-detail="${x.id}">Visualizar</button>
+                  ${x.active?`<button class="btn danger" data-inactivate="${x.id}">Inativar</button>`:''}
+                </td>
+              </tr>`;
+            }).join('')}
+          </tbody>
+        </table>
+      </div>
+    </div>`;
+  }
+
+  function coverageView(){
+    const dirs = S.orgs.filter(x=>x.active && x.type==='Diretoria');
+    let rows=S.orgs.filter(x=>x.active).map(org=>{
+      const c=covered(org);
+      const uniquePeople=[...new Set(c.map(a=>a.person))];
+      return {org, c, uniquePeople};
+    })
+    .filter(x=>{
+      const q=(x.org.label+' '+x.org.name).toLowerCase();
+      return !S.covSearch || q.includes(S.covSearch.toLowerCase());
+    })
+    .filter(x=>S.coverage==='all'||(S.coverage==='covered'?x.uniquePeople.length>0:x.uniquePeople.length===0))
+    .filter(x=>S.orgType==='all'||x.org.type===S.orgType)
+    .filter(x=>S.parentDir==='all'||x.org.parent===S.parentDir||x.org.id===S.parentDir);
+
+    const roleLabel = S.role==='focal' ? 'Ponto Focal' : 'Aprovador';
+
+    return `<div class="content">
+      <div class="filters4">
+        <input class="field" data-covsearch value="${esc(S.covSearch)}" placeholder="Buscar por nome ou sigla do órgão">
+        <select class="field" data-orgtype>
+          <option value="all">Tipo: Todos</option>
+          <option value="Diretoria" ${S.orgType==='Diretoria'?'selected':''}>Diretoria</option>
+          <option value="Superintendência" ${S.orgType==='Superintendência'?'selected':''}>Superintendência</option>
+        </select>
+        <select class="field" data-coverage>
+          <option value="all">Situação: Todos</option>
+          <option value="covered" ${S.coverage==='covered'?'selected':''}>Com ${roleLabel}</option>
+          <option value="uncovered" ${S.coverage==='uncovered'?'selected':''}>Sem ${roleLabel}</option>
+        </select>
+        <select class="field" data-parentdir>
+          <option value="all">Diretoria Superior: Todas</option>
+          ${dirs.map(d=>`<option value="${d.id}" ${S.parentDir===d.id?'selected':''}>${d.id} - ${esc(d.name)}</option>`).join('')}
+        </select>
+      </div>
+      <div class="tablewrap">
+        <table>
+          <thead>
+            <tr>
+              <th class="no-sort">Órgão</th>
+              <th class="no-sort">Tipo</th>
+              <th class="no-sort">Diretoria Superior</th>
+              <th class="no-sort">Situação da Cobertura</th>
+              <th class="no-sort">Qtd. Ativos</th>
+              <th class="no-sort">Responsáveis</th>
+              <th class="no-sort">Ação</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${rows.map(x=>`<tr>
+              <td><b>${esc(x.org.label)}</b><div class="small">${esc(x.org.name)}</div></td>
+              <td>${x.org.type}</td>
+              <td>${x.org.parent||'—'}</td>
+              <td><span class="pill ${x.uniquePeople.length?'active':'warn'}">${x.uniquePeople.length?'Com '+roleLabel:'Sem '+roleLabel}</span></td>
+              <td><b>${x.uniquePeople.length}</b></td>
+              <td>${x.uniquePeople.length?x.uniquePeople.map(pid=>esc(p(pid).name)).join('<br>'):'—'}</td>
+              <td>${x.uniquePeople.length?'<span class="muted">—</span>':`<button class="btn primary" data-neworg="${x.org.id}">Cadastrar ${roleLabel}</button>`}</td>
+            </tr>`).join('')}
+          </tbody>
+        </table>
+      </div>
+    </div>`;
+  }
+
+  function historyView(){
+    const rows=S.hist.filter(x=>x.active);
+    return `<div class="content">
+      <div class="note"><b>Acesso somente leitura.</b> Permite consultar planos e registros históricos de unidades inativas. Ao remover um acesso, a linha deixa de aparecer nesta tela; a rastreabilidade permanece exclusivamente no módulo central de LOG.</div>
+      <div style="display:flex;justify-content:flex-end;margin:14px 0">
+        <button class="btn primary" data-newhist>+ Adicionar acesso a órgão inativo</button>
+      </div>
+      <div class="tablewrap">
+        <table>
+          <thead>
+            <tr>
+              <th class="no-sort">Empregado</th>
+              <th class="no-sort">Unidade Organizacional inativa</th>
+              <th class="no-sort">Tipo da Unidade</th>
+              <th class="no-sort">Data da concessão</th>
+              <th class="no-sort">Usuário responsável pela concessão</th>
+              <th class="no-sort">Ação</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${rows.length?rows.map(x=>{
+              const P=p(x.person),O=o(x.org);
+              return `<tr>
+                <td><b>${esc(P.name)}</b><div class="small">${P.mat}</div></td>
+                <td><b>${esc(O.label)}</b><div class="small">${esc(O.name)}</div></td>
+                <td>${O.type}</td>
+                <td>${x.created}</td>
+                <td>${esc(x.createdBy)}</td>
+                <td><button class="btn danger" data-removehist="${x.id}">Remover acesso</button></td>
+              </tr>`;
+            }).join(''):'<tr><td colspan="6" class="muted" style="text-align:center">Nenhum acesso histórico ativo.</td></tr>'}
+          </tbody>
+        </table>
+      </div>
+    </div>`;
+  }
+
+  function showNew(prefillOrgId){
+    const title=S.role==='focal'?'Novo Ponto Focal':'Novo Aprovador';
+    const preOrg = prefillOrgId ? o(prefillOrgId) : null;
+    const initType = preOrg ? preOrg.type : 'Diretoria';
+    const initDir = preOrg ? (preOrg.type==='Diretoria' ? preOrg.id : preOrg.parent) : 'DIPEJ';
+    const initSup = (preOrg && preOrg.type==='Superintendência') ? preOrg.id : '';
+
+    const dirs = S.orgs.filter(x=>x.active && x.type==='Diretoria');
+
+    document.querySelector('#modal').innerHTML=`
+      <div class="modalbg">
+        <form class="modal" id="formnew">
+          <div class="modalhead">
+            <div><b style="font-size:20px">${title}</b><div class="small">Toda nova atribuição nasce automaticamente com status Ativo.</div></div>
+            <button type="button" class="btn" data-close>×</button>
+          </div>
+          <div class="modalbody">
+            <div>
+              <label class="label">Nome do Empregado * <span class="small" style="font-weight:400">(Busca por nome, matrícula ou e-mail — padrão Pesquisar Currículos SAGAS)</span></label>
+              <select class="field" name="person" id="newPerson" required>
+                <option value="">Selecione um empregado interno da base do SAGAS...</option>
+                ${S.people.map(x=>`<option value="${x.id}">${esc(x.name)} · Matrícula: ${x.mat} · ${esc(x.email)}</option>`).join('')}
+              </select>
+            </div>
+            <div class="formgrid">
+              <div>
+                <label class="label">Tipo de Órgão *</label>
+                <select class="field" name="type" id="newType">
+                  <option value="Diretoria" ${initType==='Diretoria'?'selected':''}>Diretoria</option>
+                  <option value="Superintendência" ${initType==='Superintendência'?'selected':''}>Superintendência</option>
+                </select>
+              </div>
+              <div>
+                <label class="label">Diretoria *</label>
+                <select class="field" name="dir" id="newDir">
+                  ${dirs.map(d=>`<option value="${d.id}" ${initDir===d.id?'selected':''}>${esc(d.label)} · ${esc(d.name)}</option>`).join('')}
+                </select>
+              </div>
+              <div id="supWrap" style="grid-column:1/-1;display:${initType==='Superintendência'?'block':'none'}">
+                <label class="label">Superintendência *</label>
+                <select class="field" name="sup" id="newSup"></select>
+              </div>
+            </div>
+            <div id="alertBox" style="display:none"></div>
+            <div class="note">
+              <b>Escopo hierárquico aditivo:</b> a atribuição em uma Diretoria abrange a própria Diretoria e todas as Superintendências hierarquicamente subordinadas dinamicamente, sem criar vínculos físicos adicionais.
+            </div>
+          </div>
+          <div class="modalfoot">
+            <button type="button" class="btn" data-close>Cancelar</button>
+            <button type="submit" class="btn primary" id="btnSubmitNew">Cadastrar</button>
+          </div>
+        </form>
+      </div>`;
+    updateSupDropdown(initSup);
+  }
+
+  function updateSupDropdown(selectedSup){
+    const typeEl = document.querySelector('#newType');
+    const dirEl = document.querySelector('#newDir');
+    const supWrap = document.querySelector('#newSup')?.parentElement;
+    const supEl = document.querySelector('#newSup');
+    if(!typeEl||!dirEl||!supEl) return;
+    if(typeEl.value==='Superintendência'){
+      supWrap.style.display='block';
+      const sups = S.orgs.filter(x=>x.active && x.type==='Superintendência' && x.parent===dirEl.value);
+      supEl.innerHTML = sups.map(s=>`<option value="${s.id}" ${selectedSup===s.id?'selected':''}>${esc(s.label)} · ${esc(s.name)}</option>`).join('');
+    } else {
+      supWrap.style.display='none';
+    }
+  }
+
+  function showDetail(id, returnModal){
+    const a = S.a.find(x=>x.id==id);
+    if(!a) return;
+    const P = p(a.person), O = o(a.org);
+    const empHist = S.hist.filter(h=>h.person===a.person && h.active);
+
+    const histSection = a.role==='focal' ? `
+      <div style="border-top:1px solid #e2e8f0;padding-top:14px;margin-top:4px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;flex-wrap:wrap;gap:8px">
+          <div>
+            <b>Acessos a estruturas organizacionais históricas</b>
+            <div class="small">Considera o conjunto do empregado (${esc(P.name)}), em modo somente leitura.</div>
+          </div>
+          ${S.a.some(x=>x.role==='focal'&&x.person===a.person&&x.active)
+            ? `<button type="button" class="btn primary" data-newhist-person="${a.person}" data-from-detail="${a.id}">+ Adicionar acesso a órgão inativo</button>`
+            : `<span class="small muted">Requer ao menos 1 atribuição Ativa de Ponto Focal para adicionar</span>`
+          }
+        </div>
+        <div class="tablewrap">
+          <table>
+            <thead>
+              <tr>
+                <th class="no-sort">Unidade Organizacional inativa</th>
+                <th class="no-sort">Tipo</th>
+                <th class="no-sort">Data da concessão</th>
+                <th class="no-sort">Concedido Por</th>
+                <th class="no-sort">Ação</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${empHist.length ? empHist.map(h=>{
+                const HO = o(h.org);
+                return `<tr>
+                  <td><b>${esc(HO.label)}</b><div class="small">${esc(HO.name)}</div></td>
+                  <td>${HO.type}</td>
+                  <td>${h.created}</td>
+                  <td>${esc(h.createdBy)}</td>
+                  <td><button type="button" class="btn danger" data-removehist="${h.id}" data-from-detail="${a.id}">Remover acesso</button></td>
+                </tr>`;
+              }).join('') : '<tr><td colspan="5" class="muted" style="text-align:center">Nenhum acesso histórico ativo para este empregado.</td></tr>'}
+            </tbody>
+          </table>
+        </div>
+      </div>` : '';
+
+    document.querySelector('#modal').innerHTML=`
+      <div class="modalbg">
+        <div class="modal">
+          <div class="modalhead">
+            <div>
+              <b style="font-size:20px">Detalhes da Atribuição</b>
+              <div class="small">${a.role==='focal'?'Ponto Focal':'Aprovador'}</div>
+            </div>
+            <button type="button" class="btn" data-close>×</button>
+          </div>
+          <div class="modalbody">
+            <div class="formgrid info-box">
+              <div><span class="small">Empregado</span><div><b>${esc(P.name)}</b> (${P.mat})</div></div>
+              <div><span class="small">Tipo de Atribuição</span><div><b>${a.role==='focal'?'Ponto Focal':'Aprovador'}</b></div></div>
+              <div><span class="small">Órgão Diretamente Atribuído</span><div><b>${esc(O.label)}</b> — ${esc(O.name)} (${O.type})</div></div>
+              <div><span class="small">Status</span><div><span class="pill ${a.active?'active':'inactive'}">${a.active?'Ativo':'Inativo'}</span></div></div>
+            </div>
+            <div class="formgrid info-box">
+              <div><span class="small">Cadastrado Por</span><div><b>${esc(a.createdBy)}</b></div></div>
+              <div><span class="small">Cadastrado Em</span><div><b>${a.created}</b></div></div>
+              <div><span class="small">Inativado Por</span><div><b>${esc(a.inactivatedBy||'—')}</b></div></div>
+              <div><span class="small">Inativado Em</span><div><b>${a.inactivated||'—'}</b></div></div>
+            </div>
+            ${histSection}
+          </div>
+          <div class="modalfoot">
+            ${a.active?`<button type="button" class="btn danger" data-inactivate="${a.id}">Inativar atribuição</button>`:''}
+            <button type="button" class="btn" data-close>Fechar</button>
+          </div>
+        </div>
+      </div>`;
+  }
+
+  function showHistory(prefillPersonId, fromDetailId){
+    const activeFocals = S.people.filter(P=>S.a.some(a=>a.role==='focal'&&a.active&&a.person===P.id));
+    document.querySelector('#modal').innerHTML=`
+      <div class="modalbg">
+        <form class="modal" id="formhist" data-from-detail="${fromDetailId||''}">
+          <div class="modalhead">
+            <div><b style="font-size:20px">Adicionar acesso a órgão inativo</b><div class="small">Exclusivo para Pontos Focais ativos.</div></div>
+            <button type="button" class="btn" data-close>×</button>
+          </div>
+          <div class="modalbody">
+            <div>
+              <label class="label">Ponto Focal com atribuição Ativa *</label>
+              <select class="field" name="person" required>
+                <option value="">Selecione...</option>
+                ${activeFocals.map(P=>`<option value="${P.id}" ${prefillPersonId==P.id?'selected':''}>${P.mat} · ${esc(P.name)}</option>`).join('')}
+              </select>
+            </div>
+            <div>
+              <label class="label">Unidade Organizacional Inativa *</label>
+              <select class="field" name="org" required>
+                <option value="">Selecione...</option>
+                ${S.orgs.filter(x=>!x.active).map(O=>`<option value="${O.id}">${esc(O.label)} · ${esc(O.name)} (${O.type})</option>`).join('')}
+              </select>
+            </div>
+            <div class="note">
+              "A concessão deste acesso não designa o empregado como Ponto Focal da unidade inativa. O acesso permitirá exclusivamente a consulta, em modo somente leitura, dos Planos de Capacitação e demais registros historicamente vinculados a essa Unidade Organizacional. Não será permitida a criação, alteração, exclusão ou execução de operações sobre esses registros."
+            </div>
+          </div>
+          <div class="modalfoot">
+            <button type="button" class="btn" ${fromDetailId?`data-detail="${fromDetailId}"`:'data-close'}>Cancelar</button>
+            <button type="submit" class="btn primary">Confirmar concessão</button>
+          </div>
+        </form>
+      </div>`;
+  }
+
+  function confirmInactivate(id){
+    const a=S.a.find(x=>x.id==id);
+    const P=p(a.person), O=o(a.org);
+    const msg = a.role==='focal'
+      ? `Deseja inativar a atribuição de <b>${esc(P.name)}</b> como Ponto Focal de <b>${esc(O.label)}</b>? O empregado deixará de receber os acessos, responsabilidades, demandas e comunicações concedidos exclusivamente por esta atribuição.`
+      : `Deseja inativar a atribuição de <b>${esc(P.name)}</b> como Aprovador de <b>${esc(O.label)}</b>? O empregado deixará de possuir as autorizações, responsabilidades e comunicações orçamentárias decorrentes desta atribuição.`;
+
+    document.querySelector('#modal').innerHTML=`
+      <div class="modalbg">
+        <div class="modal">
+          <div class="modalhead">
+            <b style="font-size:20px">Confirmar Inativação</b>
+            <button type="button" class="btn" data-close>×</button>
+          </div>
+          <div class="modalbody">
+            <div style="line-height:1.5">${msg}</div>
+            <div class="small">O registro permanecerá armazenado para histórico e auditoria, e a operação será registrada no módulo central de LOG.</div>
+          </div>
+          <div class="modalfoot">
+            <button class="btn" data-close>Cancelar</button>
+            <button class="btn danger" data-confirm="${id}">Confirmar Inativação</button>
+          </div>
+        </div>
+      </div>`;
+  }
+
+  function confirmRemoveHist(id, fromDetailId){
+    const h=S.hist.find(x=>x.id==id);
+    if(!h) return;
+    const P=p(h.person), O=o(h.org);
+    document.querySelector('#modal').innerHTML=`
+      <div class="modalbg">
+        <div class="modal">
+          <div class="modalhead">
+            <b style="font-size:20px">Remover acesso histórico</b>
+            <button type="button" class="btn" ${fromDetailId?`data-detail="${fromDetailId}"`:'data-close'}>×</button>
+          </div>
+          <div class="modalbody">
+            <div style="line-height:1.5">
+              Deseja remover o acesso de <b>${esc(P.name)}</b> aos registros históricos vinculados ao órgão inativo <b>${esc(O.label)}</b>? Após a confirmação, o empregado deixará de visualizar esses registros por meio deste acesso complementar.
+            </div>
+            <div class="small">A linha deixará de ser exibida na listagem e a operação será registrada no módulo central de LOG.</div>
+          </div>
+          <div class="modalfoot">
+            <button class="btn" ${fromDetailId?`data-detail="${fromDetailId}"`:'data-close'}>Cancelar</button>
+            <button class="btn danger" data-confirm-remhist="${id}" data-from-detail="${fromDetailId||''}">Confirmar Remoção</button>
+          </div>
+        </div>
+      </div>`;
+  }
+
+  document.addEventListener('click',e=>{
+    const th=e.target.closest('th[data-sort]');
+    if(th){
+      const col=th.dataset.sort;
+      if(S.sortCol===col) S.sortAsc=!S.sortAsc;
+      else {S.sortCol=col; S.sortAsc=true;}
+      render();
+      return;
+    }
+    const b=e.target.closest('button');
+    if(!b)return;
+    if(b.dataset.role){S.role=b.dataset.role;S.view='assign';render()}
+    else if(b.dataset.view){S.view=b.dataset.view;render()}
+    else if(b.hasAttribute('data-new'))showNew();
+    else if(b.dataset.neworg)showNew(b.dataset.neworg);
+    else if(b.hasAttribute('data-newhist'))showHistory();
+    else if(b.dataset.newhistPerson)showHistory(b.dataset.newhistPerson, b.dataset.fromDetail);
+    else if(b.dataset.detail)showDetail(b.dataset.detail);
+    else if(b.dataset.inactivate)confirmInactivate(b.dataset.inactivate);
+    else if(b.dataset.confirm){
+      const item=S.a.find(x=>x.id==b.dataset.confirm);
+      item.active=false;
+      item.inactivated=nowStr();
+      item.inactivatedBy='Gestor Educacional (01049921)';
+      document.querySelector('#modal').innerHTML='';
+      toast('Atribuição inativada e registrada no LOG.');
+      if(item.role==='focal') syncHistAuto(item.person);
+      render();
+    }
+    else if(b.dataset.removehist)confirmRemoveHist(b.dataset.removehist, b.dataset.fromDetail);
+    else if(b.dataset.confirmRemhist){
+      const item=S.hist.find(x=>x.id==b.dataset.confirmRemhist);
+      if(item) item.active=false;
+      const fd = b.dataset.fromDetail;
+      if(fd) showDetail(fd);
+      else document.querySelector('#modal').innerHTML='';
+      render();
+      toast('Acesso histórico removido. Rastreabilidade mantida no módulo central de LOG.');
+    }
+    else if(b.hasAttribute('data-close'))document.querySelector('#modal').innerHTML='';
+    else if(b.dataset.kpi==='uncovered'){S.view='coverage';S.coverage='uncovered';render()}
+    else if(b.dataset.kpi==='active'){S.view='assign';S.status='active';render()}
+    else if(b.dataset.kpi==='history'){S.view='history';render()}
+  });
+
+  document.addEventListener('change',e=>{
+    if(e.target.id==='newType'||e.target.id==='newDir'){
+      updateSupDropdown();
+      const ab=document.querySelector('#alertBox');
+      if(ab){ab.style.display='none';ab.dataset.confirmed='';document.querySelector('#btnSubmitNew').textContent='Cadastrar';}
+    }
+    if(e.target.id==='newPerson'||e.target.id==='newSup'){
+      const ab=document.querySelector('#alertBox');
+      if(ab){ab.style.display='none';ab.dataset.confirmed='';document.querySelector('#btnSubmitNew').textContent='Cadastrar';}
+    }
+    if(e.target.matches('[data-status]')){S.status=e.target.value;render()}
+    if(e.target.matches('[data-coverage]')){S.coverage=e.target.value;render()}
+    if(e.target.matches('[data-orgtype]')){S.orgType=e.target.value;render()}
+    if(e.target.matches('[data-parentdir]')){S.parentDir=e.target.value;render()}
+  });
+
+  document.addEventListener('input',e=>{
+    if(e.target.matches('[data-search]')){S.search=e.target.value;render()}
+    if(e.target.matches('[data-covsearch]')){S.covSearch=e.target.value;render()}
+  });
+
+  document.addEventListener('submit',e=>{
+    e.preventDefault();
+    const fd=new FormData(e.target);
+    if(e.target.id==='formnew'){
+      const pid=+fd.get('person');
+      const type=fd.get('type');
+      const oid=type==='Diretoria'?fd.get('dir'):fd.get('sup');
+      if(!pid||!oid)return;
+      if(S.a.some(x=>x.role===S.role&&x.person===pid&&x.org===oid&&x.active)){
+        toast('Já existe uma atribuição ativa para esta combinação de Empregado + Tipo + Órgão.');
+        return;
+      }
+
+      if(S.role==='focal'){
+        const ab = document.querySelector('#alertBox');
+        if(ab.dataset.confirmed!=='true'){
+          const otherOrgs = S.a.filter(x=>x.role==='focal'&&x.person===pid&&x.active).map(x=>o(x.org).label);
+          const otherPeople = S.a.filter(x=>x.role==='focal'&&x.org===oid&&x.active).map(x=>p(x.person).name);
+          let alerts=[];
+          if(otherOrgs.length){
+            alerts.push(`O empregado selecionado já possui atribuição ativa como Ponto Focal do órgão <b>${esc(otherOrgs.join(', '))}</b>. O novo cadastro resultará em atribuições simultâneas para órgãos distintos. Deseja continuar?`);
+          }
+          if(otherPeople.length){
+            alerts.push(`O órgão <b>${esc(o(oid).label)}</b> já possui um ou mais Pontos Focais designados com status Ativo (<b>${esc(otherPeople.join(', '))}</b>). O novo cadastro fará com que o órgão possua múltiplos Pontos Focais com as mesmas responsabilidades e comunicados. Deseja continuar?`);
+          }
+          if(alerts.length){
+            ab.innerHTML = `<div class="note" style="border-color:#f59e0b;background:#fffbeb"><b>Alerta de confirmação obrigatória (registrado em LOG):</b><br>${alerts.join('<br><br>')}</div>`;
+            ab.style.display='block';
+            ab.dataset.confirmed='true';
+            document.querySelector('#btnSubmitNew').textContent='Continuar e Confirmar';
+            return;
+          }
+        }
+      }
+
+      S.a.unshift({
+        id:Date.now(),
+        role:S.role,
+        person:pid,
+        org:oid,
+        active:true,
+        created:nowStr(),
+        createdBy:'Gestor Educacional (01049921)',
+        inactivated:'',
+        inactivatedBy:''
+      });
+      document.querySelector('#modal').innerHTML='';
+      render();
+      toast('Atribuição cadastrada com sucesso e registrada no LOG.');
+    }
+    if(e.target.id==='formhist'){
+      const pid=+fd.get('person'),oid=fd.get('org');
+      const fromDetail=e.target.dataset.fromDetail;
+      if(!pid||!oid)return;
+      if(S.hist.some(x=>x.person===pid&&x.org===oid&&x.active)){
+        toast('Não é permitida mais de uma concessão ativa para a mesma combinação Empregado + Unidade inativa.');
+        return;
+      }
+      S.hist.unshift({
+        id:Date.now(),
+        person:pid,
+        org:oid,
+        active:true,
+        created:nowStr(),
+        createdBy:'Gestor Educacional (01049921)'
+      });
+      if(fromDetail) showDetail(fromDetail);
+      else document.querySelector('#modal').innerHTML='';
+      render();
+      toast('Acesso histórico concedido em modo somente leitura.');
+    }
+  });
+
+  render();
+})();
+</script></body></html>
